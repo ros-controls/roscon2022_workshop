@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>roscon2022_control_workshop</name>
+  <version>0.0.0</version>
+  <description>Support files for the ros2_control workshop at ROSCon 2022 in Kyoto, Japan.</description>
+  <maintainer email="denis@stoglrobotics.de">Denis Štogl</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
