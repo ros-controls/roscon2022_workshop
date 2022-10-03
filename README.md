@@ -63,4 +63,44 @@ The structure of the repository follows the flow of integrating robots with ROS2
 
 ## Hardware used in this repository
 
-The repository uses **Hercules** robot...
+
+
+## Details about the workshop
+
+### 1. 📑 Setting up hardware description for *ros2_control*
+
+##### GOAL
+
+  - learn how to setup URDF for a robot using XACRO macros
+  - learn what URDF changes are needed to integrate a robot with `ros2_control`
+
+
+##### 🗒 Setting up URDF using XACRO for a robot
+
+For any robot that is used with ROS/ROS2 URDF description is needed.
+This description holds information about kinematics, visualization (e.g., for Rviz2) and collision data.
+This description is are also used by popular ROS2 high-level libraries like, MoveIt2, Nav2 and Simulators.
+
+In this excercise we will focus on setting up the description using XACRO format which is highly configurable and parameterizable and generally better to use then static URDF format.
+
+**For the description file create `contrlko_description` package**
+
+**Task 1** Setup the XACRO for RRbot in a new package called
+
+Kinematics:
+
+  - 2 DoF
+  - 1st joint is on a podest 30 cm above the ground and rotates around the axis orthogonal to the ground
+  - 1st link ist 50cm long (box 5x5cm)
+  - 2nd joint is rotation orthogonal to the first link's longer face
+  - 2nd link is 40cm long (cylinder with 4cm diameter)
+
+References:
+  - https://wiki.ros.org/urdf
+
+
+**TIPP**: `RosTeamWS` helper library has some scripts that can help you to solve this task faster.
+
+  - [Commonly used robot-package structure](https://stoglrobotics.github.io/ros_team_workspace/master/guidelines/robot_package_structure.html)
+  - [Creating a new package](https://stoglrobotics.github.io/ros_team_workspace/master/use-cases/ros_packages/create_package.html)
+  - [Setting up robot description](https://stoglrobotics.github.io/ros_team_workspace/master/use-cases/ros_packages/setup_robot_description_package.html)
