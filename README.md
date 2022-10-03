@@ -73,9 +73,7 @@ In this excercise we will focus on setting up the description using the XACRO fo
 
 Branch: `1-robot-description/task`
 
-
-Task 1 Setup the XACRO for RRbot in a package called `contrlko_description`
-
+Task is to setup the XACRO for RRbot in a package called `controlko_description`.
 
 Kinematics:
 
