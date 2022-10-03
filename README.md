@@ -38,7 +38,7 @@ The structure of the repository follows the flow of integrating robots with ROS2
    1. 🛠 How to setup *Mock Hardware* for a robot?
    2. 🔩 How to test it with a of-the-shelf controller?
 
-3. ⚙ Getting know the roles of the main components of *ros2_control* framework: *Controller Manager*, *Controllers*, *Resource Manager* and *Hardware Interface*
+3. ⚙ Getting know the roles of the main components of *ros2_control* framework: *Controller Manager*, *Controllers*, *Resource Manager* and *Hardware Interface* -- 30 min
 
 4. 🔬 Introspection of *ros2_control* system
 
@@ -112,7 +112,7 @@ Files to create or adjust:
   - `view_robot.launch.py` - loading and showing robot in `rviz2`
 
 
-**TIPP**: `RosTeamWS` tool has some scripts that can help you to solve this task faster. Resources:
+**TIPP**: `RosTeamWS` tool has some scripts that can help you to solve this task faster (on the branch is this already implemented). Resources:
 
   - [Commonly used robot-package structure](https://stoglrobotics.github.io/ros_team_workspace/master/guidelines/robot_package_structure.html)
   - [Creating a new package](https://stoglrobotics.github.io/ros_team_workspace/master/use-cases/ros_packages/create_package.html)
