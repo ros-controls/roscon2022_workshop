@@ -1,7 +1,8 @@
 # $LICENSE$
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
+from launch.actions import DeclareLaunchArgument, RegisterEventHandler, TimerAction
+from launch.event_handlers import OnProcessStart
 from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
@@ -71,11 +72,23 @@ def generate_launch_description():
         arguments=["-d", rviz_config_file],
     )
 
+    delay_rviz_after_joint_state_publisher_node = RegisterEventHandler(
+        event_handler=OnProcessStart(
+            target_action=joint_state_publisher_node,
+            on_start=[
+                TimerAction(
+                    period=2.0,
+                    actions=[rviz_node],
+                ),
+            ],
+        )
+    )
+
     return LaunchDescription(
         declared_arguments
         + [
             joint_state_publisher_node,
             robot_state_publisher_node,
-            rviz_node,
+            delay_rviz_after_joint_state_publisher_node,
         ]
     )
