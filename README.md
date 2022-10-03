@@ -38,7 +38,7 @@ The structure of the repository follows the flow of integrating robots with ROS2
    1. 🛠 How to setup *Mock Hardware* for a robot?
    2. 🔩 How to test it with a of-the-shelf controller?
 
-3. ⚙ Getting know the roles of the main components of *ros2_control* framework: *Controller Manager*, *Controllers*, *Resource Manager* and *Hardware Interface*
+3. ⚙ Getting know the roles of the main components of *ros2_control* framework: *Controller Manager*, *Controllers*, *Resource Manager* and *Hardware Interface* -- 30 min
 
 4. 🔬 Introspection of *ros2_control* system
 
@@ -73,9 +73,7 @@ In this excercise we will focus on setting up the description using XACRO format
 
 Branch: `1-robot-description/task`
 
-
-Task 1 Setup the XACRO for RRbot in a package called `contrlko_description`
-
+Task is to setup the XACRO for RRbot in a package called `controlko_description`.
 
 Kinematics:
 

@@ -2,8 +2,8 @@
 <robot xmlns:xacro="http://wiki.ros.org/xacro" name="rrbot">
 
   <!-- Use this if parameters are set from the launch file, otherwise delete -->
-  <xacro:arg name="use_fake_hardware" default="false" />
-  <xacro:arg name="fake_sensor_commands" default="false" />
+  <xacro:arg name="use_mock_hardware" default="false" />
+  <xacro:arg name="mock_sensor_commands" default="false" />
   <xacro:arg name="prefix" default="" />
 
   <xacro:include filename="$(find controlko_description)/urdf/rrbot/rrbot_macro.xacro"/>
@@ -21,7 +21,7 @@
   <xacro:rrbot_ros2_control
     name="rrbot"
     prefix="$(arg prefix)"
-    use_fake_hardware="$(arg use_fake_hardware)"
-    fake_sensor_commands="$(arg fake_sensor_commands)" />
+    use_mock_hardware="$(arg use_mock_hardware)"
+    mock_sensor_commands="$(arg mock_sensor_commands)" />
 
 </robot>
