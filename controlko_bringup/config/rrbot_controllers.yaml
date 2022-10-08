@@ -5,46 +5,33 @@ controller_manager:
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
-    forward_position_controller:              # delete entry if controller is not applicable
+    forward_position_controller:
       type: forward_command_controller/ForwardCommandController
 
-    forward_velocity_controller:              # delete entry if controller is not applicable
-      type: forward_command_controller/ForwardCommandController
-
-    joint_trajectory_controller:              # delete entry if controller is not applicable
+    joint_trajectory_controller:
       type: joint_trajectory_controller/JointTrajectoryController
 
-forward_position_controller:                  # delete entry if controller is not applicable
+
+forward_position_controller:
   ros__parameters:
     joints:
       - joint1
       - joint2
-      - joint3
-      - joint4
-      - joint5
-      - joint6
     interface_name: position
 
-forward_velocity_controller:                  # delete entry if controller is not applicable
-  ros__parameters:
-    joints:
-      - joint1
-      - joint2
-      - joint3
-      - joint4
-      - joint5
-      - joint6
-    interface_name: velocity
 
-joint_trajectory_controller:                  # delete entry if controller is not applicable
+joint_trajectory_controller:
   ros__parameters:
     joints:
       - joint1
       - joint2
-      - joint3
-      - joint4
-      - joint5
-      - joint6
+
+    command_interfaces:
+      - position
+
+    state_interfaces:
+      - position
+      - velocity
 
     state_publish_rate: 50.0 # Defaults to 50
     action_monitor_rate: 20.0 # Defaults to 20

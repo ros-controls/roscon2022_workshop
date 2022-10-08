@@ -6,9 +6,14 @@ from launch.actions import (
     RegisterEventHandler,
     TimerAction,
 )
-from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution
+from launch.event_handlers import OnProcessExit, OnProcessStart
+from launch.substitutions import (
+    Command,
+    FindExecutable,
+    LaunchConfiguration,
+    PathJoinSubstitution,
+)
 from launch_ros.actions import Node
-from launch.event_handlers import OnProcessExit
 from launch_ros.substitutions import FindPackageShare
 
 
@@ -73,6 +78,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             "robot_controller",
             default_value="forward_position_controller",
+            choices=["forward_position_controller", "joint_trajectory_controller"],
             description="Robot controller to start.",
         )
     )
@@ -120,11 +126,8 @@ def generate_launch_description():
     control_node = Node(
         package="controller_manager",
         executable="ros2_control_node",
+        output="both",
         parameters=[robot_description, robot_controllers],
-        output={
-            "stdout": "screen",
-            "stderr": "screen",
-        },
     )
     robot_state_pub_node = Node(
         package="robot_state_publisher",
@@ -143,7 +146,11 @@ def generate_launch_description():
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
+        arguments=[
+            "joint_state_broadcaster",
+            "--controller-manager",
+            "/controller_manager",
+        ],
     )
 
     robot_controllers = [robot_controller]
@@ -158,15 +165,25 @@ def generate_launch_description():
         ]
 
     # Delay loading and activation of `joint_state_broadcaster` after start of ros2_control_node
-    delay_joint_state_broadcaster_spawner_after_ros2_control_node = RegisterEventHandler(
-        event_handler=OnProcessStart(
-            target_action=control_node,
-            on_start=[
-                TimerAction(
-                    period=3.0,
-                    actions=[joint_state_broadcaster_spawner],
-                ),
-            ],
+    delay_joint_state_broadcaster_spawner_after_ros2_control_node = (
+        RegisterEventHandler(
+            event_handler=OnProcessStart(
+                target_action=control_node,
+                on_start=[
+                    TimerAction(
+                        period=1.0,
+                        actions=[joint_state_broadcaster_spawner],
+                    ),
+                ],
+            )
+        )
+    )
+
+    # Delay rviz start after Joint State Broadcaster to avoid unnecessary warning output.
+    delay_rviz_after_joint_state_broadcaster_spawner = RegisterEventHandler(
+        event_handler=OnProcessExit(
+            target_action=joint_state_broadcaster_spawner,
+            on_exit=[rviz_node],
         )
     )
 
@@ -192,9 +209,8 @@ def generate_launch_description():
         + [
             control_node,
             robot_state_pub_node,
-            rviz_node,
-            joint_state_broadcaster_spawner,
+            delay_rviz_after_joint_state_broadcaster_spawner,
+            delay_joint_state_broadcaster_spawner_after_ros2_control_node,
         ]
-        +
-        delay_robot_controller_spawners_after_joint_state_broadcaster_spawner
+        + delay_robot_controller_spawners_after_joint_state_broadcaster_spawner
     )
