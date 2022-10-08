@@ -90,17 +90,58 @@ In this excercise we will focus on setting up the description using XACRO format
 Kinematics:
 
   - 2 DoF
-  - 1st joint is on a podest 30 cm above the ground and rotates around the axis orthogonal to the ground
-  - 1st link ist 50cm long (box 5x5cm)
-  - 2nd joint is rotation orthogonal to the first link's longer face
-  - 2nd link is 40cm long (cylinder with 4cm diameter)
+  - 1st joint is on a podest (box 30x30x30 cm) 30 cm above the ground and rotates around the axis orthogonal to the ground
+  - 1st link ist 50cm long (cylinder with 20cm diameter)
+  - 2nd joint is rotation orthogonal to the first link's height
+  - 2nd link is 60cm long  (10x10cm cross-section 5x5cm)
+
+Hardware:
+
+  - Force Torque Sensor at TCP (6D)
+  - 2 digital inputs and output (outputs can be measured)
 
 References:
+
   - https://wiki.ros.org/urdf
+  - https://wiki.ros.org/urdf/XML
 
 
-**TIPP**: `RosTeamWS` helper library has some scripts that can help you to solve this task faster.
+Files to create:
+
+  - `rrbot_macro.xacro` - macro with kinematics and geometries for the `rrbot`
+  - `rrbot.urdf.xacro` - main xacro file for the robot where macro is instantiated
+  - `view_robot.launch.py` - loading and showing robot in `rviz2`
+
+
+**TIPP**: `RosTeamWS` tool has some scripts that can help you to solve this task faster. Resources:
 
   - [Commonly used robot-package structure](https://stoglrobotics.github.io/ros_team_workspace/master/guidelines/robot_package_structure.html)
   - [Creating a new package](https://stoglrobotics.github.io/ros_team_workspace/master/use-cases/ros_packages/create_package.html)
   - [Setting up robot description](https://stoglrobotics.github.io/ros_team_workspace/master/use-cases/ros_packages/setup_robot_description_package.html)
+
+
+##### 🗒 Setting up URDF using XACRO for a robot
+
+TODO: Add example of the `ros2_control` tag.
+
+Create XACRO macro file with `<ros2_control>` tag and add to it:
+
+1. two joints with `position` command interface and `position`, `velocity` and `acceleration` state interfaces.
+2. one senosor called `tcp_fts_sensor` with six state interfaces: `fx`, `fy`, `fz`, `tx`, `ty`, and `tz`; and parameter `frame_id` with value `tool0`.
+3. gpio block called `flange_gpios` with two digital inputs and outputs with feedback.
+
+Include the macro file in `rrbot.urdf.xacro`.
+
+
+Files to create:
+  - `rrbot_macro.ros2_control.xacro` - file with the `ros2_control` macro for the `rrbot`
+
+
+##### Solution:
+
+Branch: `1-rrbot-description`
+Check the files listed above and execute:
+```
+ros2 launch controlko_description view_rrbot.launch.py
+```
+to view the robot and move its joins using `Joint State Publisher` GUI.
