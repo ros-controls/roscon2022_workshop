@@ -149,7 +149,7 @@ ros2 launch controlko_description view_rrbot.launch.py
 to view the robot and move its joins using `Joint State Publisher` GUI.
 
 
-### 🖥 Using *Mock Hardware* plugin for simple and generic testing of the setup
+### 2. 🖥 Using *Mock Hardware* plugin for simple and generic testing of the setup
 
 ##### GOAL
 
@@ -226,3 +226,47 @@ ros2 launch controlko_bringup test_joint_trajectory_controller.launch.py
 ```
 
 **NOTE**: delay between spawning controllers is usually not necessary, but useful when starting a complex setup. Adjust this specifically for the specific use-case.
+
+
+### 3. ⚙ Getting know the roles of the main components of *ros2_control* framework
+
+Start the previous example one more time and try to answer the following questions:
+
+1. What and where is *Controller Manager*?
+2. What are *Controllers*? How they can be seen in the ROS2?
+3. What is *Resource Manager*? Where can you see it? How to access it?
+4. What is *Hardware Interface*? Where is this stored? How to interact with it?
+
+##### Solution:
+
+TODO: Add diagram/figure here.
+
+
+### 4. 🔬 Introspection of *ros2_control* system
+
+There are two options to interact with the ros2_control, first, using CLI interface with command `ros2 control <command>` (package `ros2controlcli`), and second, using services of controller manager directly.
+
+Try figure out how to answer following questions using those tools:
+
+1. What controllers are loaded in the system?
+2. What is the state of controllers?
+3. What hardware interfaces are in which state?
+4. Which interfaces are available?
+5. How can we switch between `forward_position_controller` and `joint_trajectory_controller`?
+6. What happens when you try to run all controllers in parallel?
+7. What interfaces are controllers using?
+
+Also there are few graphical tools available for `ros2_control`: `rqt_controller_manager` and `rqt_joint_trajectory_controller`. Try to use those tools.
+
+##### Solution:
+
+Answers to the questions:
+
+1. `ros2 control list_controllers`
+2. `ros2 control list_controllers`
+3. `ros2 service call /controller_manager/list_hardware_components controller_manager_msgs/srv/ListHardwareComponents {}`
+4. `ros2 control list_hardware_interfaces`
+5. `ros2 run controller_manager spawner forward_position_controller --inactive`
+   `ros2 control switch_controllers --deactivate joint_trajectory_controller --activate forward_position_controller`
+6. See output in the terminal where `ros2_control_node` is running: `ros2 control switch_controllers --activate joint_trajectory_controller`
+7. `ros2 control list_controllers -v`
