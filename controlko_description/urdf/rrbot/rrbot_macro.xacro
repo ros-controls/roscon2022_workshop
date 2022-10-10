@@ -14,7 +14,6 @@
         <origin xyz="0 0 0.15" rpy="0 0 0" />
         <geometry>
           <box size="0.3 0.3 0.3"/>
-<!--           <mesh filename="package://controlko_description/meshes/rrbot/visual/base_link.dae" /> -->
         </geometry>
         <material name="StoglRobotics/Violet"/>
       </visual>
@@ -22,10 +21,13 @@
         <origin xyz="0 0 0.15" rpy="0 0 0" />
         <geometry>
           <box size="0.3 0.3 0.3"/>
-<!--           <mesh filename="package://controlko_description/meshes/rrbot/collision/base_link.stl" /> -->
         </geometry>
       </collision>
     </link>
+    <gazebo reference="${prefix}base_link">
+      <material>Gazebo/Orange</material>
+    </gazebo>
+
     <!-- link 1 -->
     <link name="${prefix}link1">
       <!-- Default inertial for Gazebo - copy and edit block from 'common.xacro'
@@ -45,6 +47,10 @@
         </geometry>
       </collision>
     </link>
+    <gazebo reference="${prefix}link1">
+        <material>Gazebo/Black</material>
+    </gazebo>
+    
     <!-- link 2 -->
     <link name="${prefix}link2">
       <!-- Default inertial for Gazebo - copy and edit block from 'common.xacro'
@@ -64,6 +70,9 @@
         </geometry>
       </collision>
     </link>
+    <gazebo reference="${prefix}link2">
+      <material>Gazebo/Gray</material>
+    </gazebo>
 
     <!-- All-zero tool frame. This frame should correspond to the TOOL frame of the robot's controller.) -->
     <link name="${prefix}tool0" />
@@ -92,7 +101,7 @@
       <parent link="${prefix}base_link" />
       <child link="${prefix}link1" />
       <axis xyz="0 0 1" />
-      <limit effort="0" lower="${radians(-380)}" upper="${radians(380)}" velocity="${radians(180)}" />
+      <limit effort="1000" lower="${radians(-380)}" upper="${radians(380)}" velocity="${radians(180)}" />
     </joint>
     <!-- joint 2 -->
     <joint name="${prefix}joint2" type="revolute">
@@ -100,7 +109,7 @@
       <parent link="${prefix}link1" />
       <child link="${prefix}link2" />
       <axis xyz="0 1 0" />
-      <limit effort="0" lower="${radians(-60)}" upper="${radians(240)}" velocity="${radians(180)}" />
+      <limit effort="1000" lower="${radians(-60)}" upper="${radians(240)}" velocity="${radians(180)}" />
     </joint>
 
     <!-- tool frame - fixed frame -->
