@@ -61,6 +61,7 @@ The structure of the repository follows the flow of integrating robots with ROS2
     1. 💉 Parameter injection
     2. ⚖ Typical setup of robots and it packages
 
+
 ## Hardware used in this repository
 
 
@@ -209,7 +210,7 @@ then publish command to the forward command controller:
 ```
 ros2 topic pub /forward_position_controller/commands std_msgs/msg/Float64MultiArray "
 layout:
- di.m: []
+ dim: []
  data_offset: 0
 data:
  - 0.7
@@ -270,3 +271,51 @@ Answers to the questions:
    `ros2 control switch_controllers --deactivate joint_trajectory_controller --activate forward_position_controller`
 6. See output in the terminal where `ros2_control_node` is running: `ros2 control switch_controllers --activate joint_trajectory_controller`
 7. `ros2 control list_controllers -v`
+
+
+### 5. 💻 Simulating your hardware using Gazebo Classic and Gazebo
+
+ros2_control is integrated with simulators using simulator-specific plugins.
+Those plugins extend controller manager with simulator-related functionalities and enables loading hardware interfaces that are created specifically for the simulator.
+Simulators are using description under `<ros2_control>` to setup the interfaces.
+They are searched for interfaces with standard names, `position`, `velocity` and `effort`, to wire them with the internal simulator-states.
+
+The plugins and interface for the simulators are the following:
+
+**Gazebo Classic**
+  - Package: `gazebo_ros2_control`
+  - Simulator plugin: `libgazebo_ros2_control.so`
+  - HW interface plugin: `gazebo_ros2_control/GazeboSystem`
+
+**Gazebo**
+  - Package: `gz_ros2_control`
+  - Simulator plugin: `libign_ros2_control-system.so`
+  - HW interface plugin: `ign_ros2_control/IgnitionSystem`
+  **NOTE** `ign` will be switched to `gz` very soon!
+
+
+Let's define those plugins for `RRBot`:
+
+1. Extend `rrbot.urdf.xacro` with `<gazebo>` tags defining simulator plugins and parameters.
+2. Add hardware interface plugins under `<ros2_control>` tag.
+3. Add new launch file `rrbot_sim_gazebo_class.launch.py` for starting Gazebo Classic simulation.
+4. Add new launch file `rrobt_sim_gazebo.launch.py` for starting Gazebo simulation.
+
+##### Solution:
+
+Branch: `5-simulation`
+
+Check updated files from the above list.
+To start Gazebo Classic simulation use:
+```
+ros2 launch controlko_bringup rrbot_sim_gazebo_classic.launch.py
+```
+
+To start Gazebo simulation use:
+```
+ros2 launch controlko_bringup rrbot_sim_gazebo.launch.py
+```
+
+Now execute test script for joint trajectory controller to move the robot.
+
+**NOTE**: When running simulation be sure to set the joint limits defined in the macro file.
