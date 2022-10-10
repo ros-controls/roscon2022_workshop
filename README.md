@@ -13,7 +13,6 @@ But actually, it is much more, it is kernel of ROS2 system that controls robots:
  - it provide resource access management,
  - controls theirs lifecycle and so on.
 
-
 For more details check [this presentation]
 
 
@@ -33,55 +32,27 @@ The structure of the repository follows the flow of integrating robots with ROS2
 
 3. ⚙ Getting know the roles of the main components of *ros2_control* framework: *Controller Manager*, *Controllers*, *Resource Manager* and *Hardware Interface*
 
-4. 🔃 Getting familiar with the lifecycle of controllers and hardware and how to use it
+4. 🔬 Introspection of *ros2_control* system
 
-5. 🤖 How to write a hardware interface for a robot
+5. 💻 Simulating your hardware using Gazebo Classic and Gazebo
 
-6. 💻 Simulating your hardware using Gazebo Classic and Gazebo
+6. 🔃 Getting familiar with the lifecycle of controllers and hardware and how to use it
 
-7. 🛂 How to write a controller
+7. 🤖 How to write a hardware interface for a robot
 
-8. 🔗 Reusing standard controller and creating controller-chains
+8. 🛂 How to write a controller
 
-9. ♻ Modular reuse of hardware drivers for complex systems
+9. 🔗 Reusing standard controller and creating controller-chains
 
-10. 🤖🤖🤖 Managing multiple robots with ros2_control
+10. ♻ Modular reuse of hardware drivers for complex systems
 
-11. 🔬 Introspection of *ros2_control* system
+11. 🤖🤖🤖 Managing multiple robots with ros2_control
 
-12. 👑 King's Tips:
+12. 👑 Dr. Denis' Tips:
 
-   1. 💉 Parameter injection
-   2. ⚖ Typical setup of robots and it packages
-
+    1. 💉 Parameter injection
+    2. ⚖ Typical setup of robots and it packages
 
 ## Hardware used in this repository
 
 The repository uses **Hercules** robot...
-
-
-## 💻 Simulating your hardware using Gazebo Classic and Gazebo
-
-**Branch**: 6-simulating-hardware
-
-#### Gazebo Classic
-
-You have to add `gazebo_ros2_control` plugin in your robot's URDF, e.g.,
-
-```
-
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
