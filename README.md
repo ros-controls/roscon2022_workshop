@@ -4,6 +4,14 @@ Thank you for your interest in ros2_control.
 This repository is developed with a purpose of supporting workshop on *ros2_control* @ ROSCon2022 in Kyoto, Japan.
 Regardless if you could or could not participate the repository will provide you with detailed instruction on how utilize *ros2_control* framework and explain functionality and purpose of its individual parts.
 
+### Installing this repository
+
+After cloning the repository, go to your source workspace and execute following command to install all dependencies:
+```
+vcs import -input roscon2022_control_workshop/roscon2022_workshop.repos .
+rosdep update
+rosdep install -y -i --from-paths .
+```
 
 ## What is *ros2_control*
 
