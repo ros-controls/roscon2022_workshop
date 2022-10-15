@@ -319,3 +319,56 @@ ros2 launch controlko_bringup rrbot_sim_gazebo.launch.py
 Now execute test script for joint trajectory controller to move the robot.
 
 **NOTE**: When running simulation be sure to set the joint limits defined in the macro file.
+
+
+### 6. 🔃 Getting familiar with the lifecycle of controllers and hardware and how to use it
+
+*ros2_control* enables you to control lifecycle of controllers and hardware components.
+The states and transitions are the same as for the `Lifecycle Nodes`.
+Check the diagram below for more details:
+
+![Lifecycle of Hardware Interfaces](https://control.ros.org/master/_images/hardware_interface_lifecycle.png)
+
+##### Task
+
+1. Start the `RRbot` with `Mock System`
+2. Check lifecylce state of controllers and hardware interfaces
+3. Activate `joint_trajectory_controller` controller. What else you have to do to achieve that?
+4. Set hardware to `inactive` state. What is now internal state of *ros2_control* instance?
+5. Have you heard for `RQT Controller Manager` plugin? Try it!
+
+##### Solution:
+
+Branch: `6-getting-know-lifecycle`
+
+Execute following commands to get the answers from the task:
+
+1. `ros2 launch controlko_bringup rrbot.launch.py`
+2. Execute in another terminal:
+   ```
+   ros2 control list_controllers
+   ros2 service call /controller_manager/list_hardware_components controller_manager_msgs/srv/ListHardwareComponents {}
+   ```
+3. Execute the following commands (this is on of the multiple valid ways)
+   ```
+   ros2 control load_controller joint_trajectory_controller
+   ros2 control set_controller_state joint_trajectory_controller inactive
+   ros2 control switch_controllers --deactivate forward_position_controller --activate joint_trajectory_controller
+   ```
+
+4. Execute the following commands (this is on of the multiple valid ways)
+   ```
+   # stop controller
+   ros2 control switch_controllers --deactivate joint_trajectory_controller
+   # get component name
+   ros2 service call /controller_manager/list_hardware_components controller_manager_msgs/srv/ListHardwareComponents {}
+   # set component state
+   ros2 service call /controller_manager/set_hardware_component_state controller_manager_msgs/srv/SetHardwareComponentState "
+   name: rrbot
+   target_state:
+    id: 0 
+    label: inactive"
+   # check internals of ros2_control
+   ros2 control list_controllers
+   ros2 control list_hardware_interfaces
+   ```
