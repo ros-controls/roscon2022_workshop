@@ -18,8 +18,12 @@ repositories:
   ros2_control:
     type: git
     url: https://github.com/ros-controls/ros2_control.git
-    version: master
+    version: roscon2022-workshop-additions
   ros2_controllers:
     type: git
     url: https://github.com/ros-controls/ros2_controllers.git
     version: roscon2022-workshop-additions
+  roscon2022_workshop:
+    type: git
+    url: https://github.com/ros-controls/roscon2022_workshop.git
+    version: master
