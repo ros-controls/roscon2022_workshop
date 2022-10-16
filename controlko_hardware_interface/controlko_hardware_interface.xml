@@ -1,0 +1,9 @@
+<library path="controlko_hardware_interface">
+  <class name="controlko_hardware_interface/RRBotHardwareInterface"
+         type="controlko_hardware_interface::RRBotHardwareInterface"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      ros2_control hardware interface.
+    </description>
+  </class>
+</library>
