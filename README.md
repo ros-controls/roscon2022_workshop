@@ -409,3 +409,20 @@ Write a hardware interface for the *RRBot*.
   - [Commonly used robot-package structure](https://stoglrobotics.github.io/ros_team_workspace/master/guidelines/robot_package_structure.html)
   - [Creating a new package](https://stoglrobotics.github.io/ros_team_workspace/master/use-cases/ros_packages/create_package.html)
   - [Setup robot’s hardware package](https://stoglrobotics.github.io/ros_team_workspace/master/use-cases/ros2_control/setup_robot_hardware_interface.html)
+
+##### Soluation
+
+Branch: `7-rrbot-hardware-interface/solution`
+
+Execute following commands to get the answers from the task:
+
+1. `ros2 launch controlko_bringup rrbot.launch.py use_mock_hardware:=false`
+
+2. Test execution with `forward_position_controller` and `joint_trajectory_controller`
+
+3. Test activation of an incompatible controller using:
+   ```
+   ros2 control load_controller incompatible_joint_trajectory_controller
+   ros2 control set_controller_state incompatible_joint_trajectory_controller inactive
+   ros2 control switch_controllers --deactivate forward_position_controller --activate incompatible_joint_trajectory_controller
+   ```
