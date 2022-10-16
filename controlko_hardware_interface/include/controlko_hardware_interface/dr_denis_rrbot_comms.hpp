@@ -40,11 +40,12 @@ public:
     joint_positions_.resize(nr_dofs_, 0.1);
     joint_velocities_.resize(nr_dofs_, 0.0);
     joint_accelerations_.resize(nr_dofs_, 0.0);
+    digital_outs_.resize(nr_dofs_, false);
   }
 
   void init()
   {
-    last_time_stamp_ = time(0);
+    last_time_stamp_ = std::chrono::steady_clock::now();
     movement_enabled_ = true;
   }
 
@@ -60,13 +61,17 @@ public:
     return true;
   }
 
+  control_mode_type get_control_mode() { return current_control_mode_; }
+
   bool write_joint_commands(
     const std::vector<double> & position_command, const std::vector<double> & velocity_command)
   {
     if (movement_enabled_)
     {
-      auto current_time = time(0);
-      auto delta_t = current_time - last_time_stamp_;
+      const auto current_time = std::chrono::steady_clock::now();
+      const double delta_t =
+        (std::chrono::duration_cast<std::chrono::duration<double>>(current_time - last_time_stamp_))
+          .count();
 
       switch (current_control_mode_)
       {
@@ -75,7 +80,7 @@ public:
         {
           auto new_velocity = (position_command[i] - joint_positions_[i]) / delta_t;
           new_velocity = new_velocity > MAX_VELOCITY ? MAX_VELOCITY : new_velocity;
-          new_velocity = new_velocity < MAX_VELOCITY ? -MAX_VELOCITY : new_velocity;
+          new_velocity = new_velocity < -MAX_VELOCITY ? -MAX_VELOCITY : new_velocity;
 
           joint_positions_[i] += new_velocity * delta_t;
 
@@ -100,7 +105,7 @@ public:
       }
     }
 
-    last_time_stamp_ = time(0);
+    last_time_stamp_ = std::chrono::steady_clock::now();
 
     return true;
   }
@@ -131,6 +136,8 @@ public:
     }
 
     digital_outs = digital_outs_;
+
+    return true;
   }
 
   bool read_sensor_values(std::vector<double> & sensor_values)
@@ -141,6 +148,8 @@ public:
       sensor_values[i] =
         static_cast<double>(rand_r(&seed)) / static_cast<double>(RAND_MAX) * SENSOR_MAX;
     }
+
+    return true;
   }
 
 private:
@@ -153,7 +162,7 @@ private:
   std::vector<double> joint_velocities_;
   std::vector<double> joint_accelerations_;
 
-  time_t last_time_stamp_;
+  std::chrono::steady_clock::time_point last_time_stamp_;
 
   bool movement_enabled_;
 };
