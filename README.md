@@ -372,3 +372,40 @@ Execute following commands to get the answers from the task:
    ros2 control list_controllers
    ros2 control list_hardware_interfaces
    ```
+
+
+### 7. 🤖 How to write a hardware interface for a robot
+
+Hardware interface is the lowest layer toward hardware in *ros2_control*.
+A hardware interface is a driver for specific robot that exports interfaces to the framework for controllers to use them.
+Overview of *ros2_control* shows this graphically:
+
+![Overview of *ros2_control*](https://control.ros.org/master/_images/ros2_control_overview.png)
+
+Lifecycle diagrams from the [Task 6]() explaines in detail when which method is used.
+
+##### Task
+
+Branch: `7-rrbot-hardware-interface/task`
+
+Write a hardware interface for the *RRBot*.
+
+1. Create a new package named `controlko_hardware_interface` with hardware interface files.
+2. During implemenation of hardware interface take care about following details:
+
+   - Which control modes are supported?
+   - What happens if an incompatible controller should be activated?
+
+3. Write a hardware interface that uses a header-only library for the communication with *RRBot*:
+
+   - check the file `controlko_hardware_interface/include/controlko_hardware_interface/dr_denis_rrbot_comms.hpp`
+   - use [Writing a new hardware interface manual](https://control.ros.org/master/doc/ros2_control/hardware_interface/doc/writing_new_hardware_interface.html) to implement the everyhting needed.
+   - extend URDF file with to use hardware interface
+
+3. What are the capabilities 
+
+**TIPP**: `RosTeamWS` tool has some scripts that can help you to solve this task faster. Resources:
+
+  - [Commonly used robot-package structure](https://stoglrobotics.github.io/ros_team_workspace/master/guidelines/robot_package_structure.html)
+  - [Creating a new package](https://stoglrobotics.github.io/ros_team_workspace/master/use-cases/ros_packages/create_package.html)
+  - [Setup robot’s hardware package](https://stoglrobotics.github.io/ros_team_workspace/master/use-cases/ros2_control/setup_robot_hardware_interface.html)
