@@ -1,0 +1,8 @@
+<library path="controlko_controllers">
+  <class name="controlko_controllers/DisplacementController"
+         type="controlko_controllers::DisplacementController" base_class_type="controller_interface::ControllerInterface">
+  <description>
+    DisplacementController ros2_control controller.
+  </description>
+  </class>
+</library>
