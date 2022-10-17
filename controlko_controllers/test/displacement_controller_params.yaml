@@ -1,0 +1,7 @@
+test_displacement_controller:
+  ros__parameters:
+
+    joints:
+      - joint1
+
+    interface_name: acceleration
