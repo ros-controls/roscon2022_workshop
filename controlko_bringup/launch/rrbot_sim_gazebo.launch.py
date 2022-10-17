@@ -159,15 +159,18 @@ def generate_launch_description():
         ]
 
     # Delay loading and activation of `joint_state_broadcaster` after start of ros2_control_node
-    delay_joint_state_broadcaster_spawner_after_ros2_control_node = RegisterEventHandler(
-        event_handler=OnProcessStart(
+    delay_joint_state_broadcaster_spawner_after_gazebo_spawn_robot = RegisterEventHandler(
+        event_handler=OnProcessExit(
             target_action=gazebo_spawn_robot,
-            on_start=[
-                TimerAction(
-                    period=3.0,
-                    actions=[joint_state_broadcaster_spawner],
-                ),
-            ],
+            on_exit=[joint_state_broadcaster_spawner],
+        )
+    )
+
+    # Delay rviz start after Joint State Broadcaster to avoid unnecessary warning output.
+    delay_rviz_after_joint_state_broadcaster_spawner = RegisterEventHandler(
+        event_handler=OnProcessExit(
+            target_action=joint_state_broadcaster_spawner,
+            on_exit=[rviz_node],
         )
     )
 
@@ -194,8 +197,8 @@ def generate_launch_description():
             gazebo,
             gazebo_spawn_robot,
             robot_state_pub_node,
-            rviz_node,
-            delay_joint_state_broadcaster_spawner_after_ros2_control_node,
+            delay_rviz_after_joint_state_broadcaster_spawner,
+            delay_joint_state_broadcaster_spawner_after_gazebo_spawn_robot,
         ]
         + delay_robot_controller_spawners_after_joint_state_broadcaster_spawner
     )
