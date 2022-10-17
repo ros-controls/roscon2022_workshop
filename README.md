@@ -402,8 +402,6 @@ Write a hardware interface for the *RRBot*.
    - use [Writing a new hardware interface manual](https://control.ros.org/master/doc/ros2_control/hardware_interface/doc/writing_new_hardware_interface.html) to implement the everyhting needed.
    - extend URDF file with to use hardware interface
 
-3. What are the capabilities 
-
 **TIPP**: `RosTeamWS` tool has some scripts that can help you to solve this task faster. Resources:
 
   - [Commonly used robot-package structure](https://stoglrobotics.github.io/ros_team_workspace/master/guidelines/robot_package_structure.html)
@@ -426,3 +424,31 @@ Execute following commands to get the answers from the task:
    ros2 control set_controller_state incompatible_joint_trajectory_controller inactive
    ros2 control switch_controllers --deactivate forward_position_controller --activate incompatible_joint_trajectory_controller
    ```
+
+8. 🛂 How to write a controller
+
+Controllers in *ros2_control* are serving on one side as "interfaces" towards ROS-world and on the other side implement algorithms to control the hardware.
+A controller, when activated, gets loaned access to exported hardware interface to read and write values directly from/to memory locations hardware interface are using.
+Although somewhat limited, this concept enables deterministic and reliable data flow between controllers and hardware interfaces (drivers).
+
+![Overview of *ros2_control*](https://control.ros.org/master/_images/ros2_control_overview.png)
+
+##### Task
+
+Branch: `8-write-controller/task`
+
+Write a controller for *SOLO-12* robot that takes joint displacments as input and updates new joint positions for it.
+
+1. Add controller files into `controlko_controllers` package.
+2. During implemenation of hardware interface take care about following details:
+
+   - How is data exchanged between controller's callbacks and the `update` method?
+   - How are statuses from controller published to ROS topics?
+
+3. Write a controller that uses `control_msgs/msg/
+
+
+**TIPP**: `RosTeamWS` tool has some scripts that can help you to solve this task faster. Resources:
+
+  - [Creating a new package](https://stoglrobotics.github.io/ros_team_workspace/master/use-cases/ros_packages/create_package.html)
+  - [Setup controller package](https://stoglrobotics.github.io/ros_team_workspace/master/use-cases/ros2_control/setup_controller.html)
