@@ -1,0 +1,61 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    pid_controller_joint1:
+      type: pid_controller/PidController
+
+    pid_controller_joint2:
+      type: pid_controller/PidController
+
+    forward_position_controller:
+      type: forward_command_controller/ForwardCommandController
+
+
+pid_controller_joint1:
+  ros__parameters:
+
+    dof_names:
+      - joint1
+
+    command_interface: velocity
+
+    reference_and_state_interfaces:
+      - velocity
+
+    gains:
+      joint1: {"p": 1.0, "i": 0.5, "d": 0.2, "i_clamp_min": -2.0, "i_clamp_max": 2.0, "antiwindup": true}
+
+
+pid_controller_joint2:
+  ros__parameters:
+
+    dof_names:
+      - joint2
+
+    command_interface: velocity
+
+    reference_and_state_interfaces:
+      - velocity
+
+    gains:
+      joint2: {"p": 1.0, "i": 0.5, "d": 0.2, "i_clamp_min": -2.0, "i_clamp_max": 2.0, "antiwindup": true}
+
+
+preceeding_forward_position_controller:
+  ros__parameters:
+    joints:
+      - pid_controller_joint1/joint1
+      - pid_controller_joint2/joint2
+    interface_name: position
+
+
+forward_position_controller:
+  ros__parameters:
+    joints:
+      - joint1
+      - joint2
+    interface_name: position

@@ -483,3 +483,18 @@ Setup a chain of *Joint Trajectory Controller* and two pid controllers, one for 
 4. Switch controller to use newly created chain instead of `forward_command_controller`
 
 **TIPP** check the `.yaml` files with parameter description and example parameters in the `src` and `test` folders.
+
+##### Solution
+
+Branch: `9-chaining-controllers/solution`
+
+1. Check the newly created files listed above.
+2. Use the following commands to introspect the system:
+
+   - `ros2 control list_controllers`
+   - `ros2 control view_controller_chains`
+   - `ros2 control list_hardware_interfaces` to see all interfaces in the *ros2_control* instance
+
+3. Switch controller to use newly create chain:
+
+   - `ros2 control switch_controllers --deactivate forward_position_controller --activate pid_controller_joint1 pid_controller_joint2 preceeding_forward_position_controller`
