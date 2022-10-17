@@ -425,7 +425,7 @@ Execute following commands to get the answers from the task:
    ros2 control switch_controllers --deactivate forward_position_controller --activate incompatible_joint_trajectory_controller
    ```
 
-8. 🛂 How to write a controller
+### 8. 🛂 How to write a controller
 
 Controllers in *ros2_control* are serving on one side as "interfaces" towards ROS-world and on the other side implement algorithms to control the hardware.
 A controller, when activated, gets loaned access to exported hardware interface to read and write values directly from/to memory locations hardware interface are using.
@@ -475,3 +475,28 @@ First check the code:
 Execute following commands to se new controller running:
 
 1. `ros2 launch controlko_bringup soho-12.launch.py`
+
+
+### 9. 🔗 Reusing standard controller and creating controller-chains
+
+There are two types of controllers in *ros2_control*, "standard" and "chainable".
+A chainable controller exports `reference interfaces` that enable other controllers to connect in front of them.
+
+![Chainable Controllers](https://control.ros.org/master/_images/ros2_control_mobile_manipulator_control_arch_base_chaining.png)
+
+##### Task
+
+Branch:  `9-chaining-controllers/task`
+
+Setup a chain of *Joint Trajectory Controller* and two pid controllers, one for each joint.
+
+1. Create a `rrbot_chained_controllers.yaml` configuration in `controlko_bringup/config` folder.
+2. Create a new launch file named `rrbot_chained_controllers.launch.py` in the `controlko_bringup` package.
+3. Start the launch file and investigate the controller's chain:
+    
+   - Which CLI commands can you use for that?
+   - How are chained controllers integrated into *ros2_control*?
+  
+4. Switch controller to use newly created chain instead of `forward_command_controller`
+
+**TIPP** check the `.yaml` files with parameter description and example parameters in the `src` and `test` folders.
