@@ -1,5 +1,4 @@
-// Copyright (c) 2022, ROSCon2022 ros2_control workshop
-// Copyright (c) 2022, Stogl Robotics Consulting UG (haftungsbeschränkt) (template)
+// Copyright (c) 2022, Stogl Robotics Consulting UG (haftungsbeschränkt)
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -181,10 +180,6 @@ controller_interface::InterfaceConfiguration DisplacementController::state_inter
 controller_interface::CallbackReturn DisplacementController::on_activate(
   const rclcpp_lifecycle::State & /*previous_state*/)
 {
-  // TODO(anyone): if you have to manage multiple interfaces that need to be sorted check
-  // `on_activate` method in `JointTrajectoryController` for examplary use of
-  // `controller_interface::get_ordered_interfaces` helper function
-
   // Set default value in command
   reset_controller_reference_msg(*(input_ref_.readFromRT)(), params_.joints);
 
@@ -194,8 +189,6 @@ controller_interface::CallbackReturn DisplacementController::on_activate(
 controller_interface::CallbackReturn DisplacementController::on_deactivate(
   const rclcpp_lifecycle::State & /*previous_state*/)
 {
-  // TODO(anyone): depending on number of interfaces, use definitions, e.g., `CMD_MY_ITFS`,
-  // instead of a loop
   for (size_t i = 0; i < command_interfaces_.size(); ++i) {
     command_interfaces_[i].set_value(std::numeric_limits<double>::quiet_NaN());
   }
@@ -207,14 +200,13 @@ controller_interface::return_type DisplacementController::update(
 {
   auto current_ref = input_ref_.readFromRT();
 
-  // TODO(anyone): depending on number of interfaces, use definitions, e.g., `CMD_MY_ITFS`,
-  // instead of a loop
   for (size_t i = 0; i < command_interfaces_.size(); ++i) {
     if (!std::isnan((*current_ref)->displacements[i])) {
       if (*(control_mode_.readFromRT()) == control_mode_type::SLOW) {
         (*current_ref)->displacements[i] /= 2;
       }
-      command_interfaces_[i].set_value((*current_ref)->displacements[i]);
+      command_interfaces_[i].set_value(
+        (*current_ref)->displacements[i] + state_interfaces_[i].get_value());
 
       (*current_ref)->displacements[i] = std::numeric_limits<double>::quiet_NaN();
     }

@@ -399,7 +399,7 @@ Write a hardware interface for the *RRBot*.
 3. Write a hardware interface that uses a header-only library for the communication with *RRBot*:
 
    - check the file `controlko_hardware_interface/include/controlko_hardware_interface/dr_denis_rrbot_comms.hpp`
-   - use [Writing a new hardware interface manual](https://control.ros.org/master/doc/ros2_control/hardware_interface/doc/writing_new_hardware_interface.html) to implement the everyhting needed.
+   - use [Writing a new hardware interface manual](https://control.ros.org/master/doc/ros2_control/hardware_interface/doc/writing_new_hardware_interface.html) to implement the hardware interface
    - extend URDF file with to use hardware interface
 
 **TIPP**: `RosTeamWS` tool has some scripts that can help you to solve this task faster. Resources:
@@ -437,18 +437,41 @@ Although somewhat limited, this concept enables deterministic and reliable data 
 
 Branch: `8-write-controller/task`
 
-Write a controller for *SOLO-12* robot that takes joint displacments as input and updates new joint positions for it.
+Write a controller for *SOLO-12* robot that takes joint displacements as input and updates new joint positions for it.
 
-1. Add controller files into `controlko_controllers` package.
-2. During implemenation of hardware interface take care about following details:
+1. Add files for controller names `DisplacementController` into `controlko_controllers` package.
+2. During implementation of hardware interface take care about following details:
 
    - How is data exchanged between controller's callbacks and the `update` method?
    - How are statuses from controller published to ROS topics?
 
+   - Controller should have a *slow mode* where displacements are reduced to the half.
+   - Controller accepts a command only once.
+
 3. Write a controller that uses `control_msgs/msg/
+
+   - Check definition of [`JointJog` message](https://github.com/ros-controls/control_msgs/blob/galactic-devel/control_msgs/msg/JointJog.msg)
+   - alternatively use CLI command: `ros2 interface show control_msgs/msg/JointJog`
+   - use [Writing a new controller manuel](https://control.ros.org/master/doc/ros2_controllers/doc/writing_new_controller.html) to implement the controller
 
 
 **TIPP**: `RosTeamWS` tool has some scripts that can help you to solve this task faster. Resources:
 
   - [Creating a new package](https://stoglrobotics.github.io/ros_team_workspace/master/use-cases/ros_packages/create_package.html)
-  - [Setup controller package](https://stoglrobotics.github.io/ros_team_workspace/master/use-cases/ros2_control/setup_controller.html)
+  - [Setup controller package](https://stoglrobotics.github.io/ros_team_workspace/master/use-cases/ros2_control/setup_controller.html) - choose setup of "normal" controller
+
+##### Solution
+
+Branch: `8-write-controller/solution`
+
+First check the code:
+
+- *ros2_control* is now using PickNik's [generate_parameter_library](https://github.com/PickNikRobotics/generate_parameter_library) so simpler and cleaner parameters usage and definition.
+  - parameters are defined in [./src/displacement_controller.yaml] file
+  - example controller setup is in:
+    - [./test/displacement_controller_params.yaml] - when controller is used directly with the hardware
+    - [./test/displacement_controller_preceeding_params.yaml] - when controller is used at the beginning of the chain (see the next task for details!)
+
+Execute following commands to se new controller running:
+
+1. `ros2 launch controlko_bringup soho-12.launch.py`
