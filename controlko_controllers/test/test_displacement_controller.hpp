@@ -1,4 +1,4 @@
-// Copyright (c) 2022, ROSCon2022 ros2_control workshop
+// Copyright (c) 2022, Stogl Robotics Consulting UG (haftungsbeschränkt)
 // Copyright (c) 2022, Stogl Robotics Consulting UG (haftungsbeschränkt) (template)
 //
 // Licensed under the Apache License, Version 2.0 (the "License");

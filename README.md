@@ -411,7 +411,7 @@ Although somewhat limited, this concept enables deterministic and reliable data 
 
 Branch: `8-write-controller/task`
 
-Write a controller for *RRBot* robot that takes joint displacments as input and updates new joint positions for it.
+Write a controller for *RRBot* robot that takes joint displacements as input and updates new joint positions for it.
 
 1. Add controller files into the `controlko_controllers` package.
 2. During the implementation take care about the following details:
@@ -437,3 +437,15 @@ Write a controller for *RRBot* robot that takes joint displacments as input and 
 ##### Solution
 
 Branch: `8-write-controller/solution`
+
+First check the code:
+
+- *ros2_control* is now using PickNik's [generate_parameter_library](https://github.com/PickNikRobotics/generate_parameter_library) so simpler and cleaner parameters usage and definition.
+  - parameters are defined in [./src/displacement_controller.yaml] file
+  - example controller setup is in:
+    - [./test/displacement_controller_params.yaml] - when controller is used directly with the hardware
+    - [./test/displacement_controller_preceeding_params.yaml] - when controller is used at the beginning of the chain (see the next task for details!)
+
+Execute the following commands to see the new controller running:
+
+1. `ros2 launch controlko_bringup rrbot.launch.py`
