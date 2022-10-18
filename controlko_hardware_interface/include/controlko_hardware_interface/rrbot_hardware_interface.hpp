@@ -95,6 +95,8 @@ private:
   std::vector<std::string> position_command_interface_names_;
   std::vector<std::string> velocity_command_interface_names_;
 
+  dr_denis_rrbot_comms::control_mode_type switch_to_mode_;
+
   std::unique_ptr<dr_denis_rrbot_comms::DrDenisRRBotComms> rrbot_comms_;
 };
 

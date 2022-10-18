@@ -144,6 +144,11 @@ hardware_interface::return_type RRBotHardwareInterface::prepare_command_mode_swi
     }
   }
 
+  // if (starting_at_least_one_pos_itf && starting_at_least_one_vel_itf)
+  // {
+  //   return hardware_interface::return_type::ERROR;
+  // }
+
   bool stopping_all_pos_itfs = true;
   bool stopping_all_vel_itfs = true;
 
@@ -166,6 +171,25 @@ hardware_interface::return_type RRBotHardwareInterface::prepare_command_mode_swi
 
   auto current_control_mode = rrbot_comms_->get_control_mode();
 
+  // want to use position mode
+  if (
+    starting_at_least_one_pos_itf && !starting_at_least_one_vel_itf ||
+    (starting_at_least_one_pos_itf &&
+     (current_control_mode == dr_denis_rrbot_comms::control_mode_type::VELOCITY &&
+      stopping_all_vel_itfs)))
+  {
+    switch_to_mode_ = dr_denis_rrbot_comms::control_mode_type::POSITION;
+  }
+
+  if (
+    starting_at_least_one_vel_itf && !starting_at_least_one_pos_itf ||
+    (starting_at_least_one_vel_itf &&
+     (current_control_mode == dr_denis_rrbot_comms::control_mode_type::POSITION &&
+      stopping_all_pos_itfs)))
+  {
+    switch_to_mode_ = dr_denis_rrbot_comms::control_mode_type::POSITION;
+  }
+
   return hardware_interface::return_type::OK;
 }
 
@@ -173,7 +197,8 @@ hardware_interface::return_type RRBotHardwareInterface::perform_command_mode_swi
   const std::vector<std::string> & /*start_interfaces*/,
   const std::vector<std::string> & /*stop_interfaces*/)
 {
-  // switch between position and velocity modes
+  rrbot_comms_->set_control_mode(switch_to_mode_);
+
   return hardware_interface::return_type::OK;
 }
 
