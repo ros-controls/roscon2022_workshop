@@ -498,3 +498,34 @@ Branch: `9-chaining-controllers/solution`
 3. Switch controller to use newly create chain:
 
    - `ros2 control switch_controllers --deactivate forward_position_controller --activate pid_controller_joint1 pid_controller_joint2 preceeding_forward_position_controller`
+
+
+### 10. ♻ Modular reuse of hardware drivers for complex systems
+
+Modular architecture of *ros2_control* where each hardware interface is a plugin that can be dynamically loaded, makes composition of hardware components very easy.
+Let's imagine situations where a manipulator should be attached to a mobile robot.
+If there are drivers for those two components already available we can reuse them without changing single line of code.
+Of course we will have to write a launch file, create URDF for newly composed robot and adjust controllers for it.
+
+The following figures are showing different architecture of hardware interfaces with monolithic or modular structures of it.
+
+![TBA](https://control.ros.org/master/_images/ros2_control_mobile_manipulator_control_arch_base_chaining.png)
+
+##### Task
+
+Attach the RRBot from `controlko_description` repository on top of the *DiffBot* from `ros2_control_demos` repository.
+
+1. Create new URDF file that puts RRBot on top of DiffBot and create a `view_rrbot_on_diffbot.launch.py` in `controlko_description` package for it.
+2. Create `rrbot_on_diffbot_controllers.yaml` file in `controlko_bringup/config` with controllers configuration.
+3. Create launch file `rrbot_on_diffbot.launch.py` in `controlko_bringup` package that starts *ros2_control* framework and both robots are using *Mock System* plugin.
+4. Configure Simulators to use *RRBot on DiffBot* configuration.
+
+   - How many `*_ros2_control` plugins should be loaded?
+   - How many `GazeboSystem` plugins in `<ros2_control>`-tag should be defined?
+
+
+**TIPS**:
+*DiffBot* can be visualized using:
+```
+ros2 launch diffbot_description view_robot.launch.py
+```
