@@ -28,23 +28,28 @@ For more details check [this presentation]
 
 The structure of the repository follows the flow of integrating robots with ROS2 and those are the following steps:
 
-1. 📑 Setting up hardware description for *ros2_control*
+
+intro -- 30 min
+
+1. 📑 Setting up hardware description for *ros2_control* -- 1h
 
    1. 🗒 Setting up URDF using XACRO for a robot
    2. 📝 Extending robot's URDF with `<ros2_control>` tag
 
-2. 🖥 Using *Mock Hardware* plugin for simple and generic testing of the setup (and how it can save you ton of time and nerves)
+2. 🖥 Using *Mock Hardware* plugin for simple and generic testing of the setup (and how it can save you ton of time and nerves)  -- 30 min
 
    1. 🛠 How to setup *Mock Hardware* for a robot?
    2. 🔩 How to test it with a of-the-shelf controller?
 
 3. ⚙ Getting know the roles of the main components of *ros2_control* framework: *Controller Manager*, *Controllers*, *Resource Manager* and *Hardware Interface* -- 30 min
 
-4. 🔬 Introspection of *ros2_control* system
+4. 🔬 Introspection of *ros2_control* system  -- 30 min
 
-5. 💻 Simulating your hardware using Gazebo Classic and Gazebo
+------------------- lunch ---------------------
 
-6. 🔃 Getting familiar with the lifecycle of controllers and hardware and how to use it
+5. 💻 Simulating your hardware using Gazebo Classic and Gazebo -- 30 min
+
+6. 🔃 Getting familiar with the lifecycle of controllers and hardware and how to use it  -- 15 min (presentation)
 
 7. 🤖 How to write a hardware interface for a robot
 
@@ -281,6 +286,13 @@ Simulators are using description under `<ros2_control>` to setup the interfaces.
 They are searched for interfaces with standard names, `position`, `velocity` and `effort`, to wire them with the internal simulator-states.
 
 The plugins and interface for the simulators are the following:
+
+
+#
+# prepare brANch w launch filess
+#
+
+
 
 **Gazebo Classic**
   - Package: `gazebo_ros2_control`
