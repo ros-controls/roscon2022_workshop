@@ -33,12 +33,12 @@ The structure of the repository follows the flow of integrating robots with ROS2
    1. 🗒 Setting up URDF using XACRO for a robot
    2. 📝 Extending robot's URDF with `<ros2_control>` tag
 
-2. 🖥 Using *Mock Hardware* plugin for simple and generic testing of the setup (and how it can save you ton of time and nerves )
+2. 🖥 Using *Mock Hardware* plugin for simple and generic testing of the setup (and how it can save you ton of time and nerves)
 
    1. 🛠 How to setup *Mock Hardware* for a robot?
    2. 🔩 How to test it with a of-the-shelf controller?
 
-3. ⚙ Getting know the roles of the main components of *ros2_control* framework: *Controller Manager*, *Controllers*, *Resource Manager* and *Hardware Interface*
+3. ⚙ Getting know the roles of the main components of *ros2_control* framework: *Controller Manager*, *Controllers*, *Resource Manager* and *Hardware Interface* -- 30 min
 
 4. 🔬 Introspection of *ros2_control* system
 
@@ -85,6 +85,10 @@ In this excercise we will focus on setting up the description using XACRO format
 
 **For the description file create `contrlko_description` package**
 
+##### Task
+
+Branch: `1-rrbot-description/task`
+
 **Task 1** Setup the XACRO for RRbot in a new package called
 
 Kinematics:
@@ -105,7 +109,6 @@ References:
   - https://wiki.ros.org/urdf
   - https://wiki.ros.org/urdf/XML
 
-
 Files to create:
 
   - `rrbot_macro.xacro` - macro with kinematics and geometries for the `rrbot`
@@ -113,7 +116,7 @@ Files to create:
   - `view_robot.launch.py` - loading and showing robot in `rviz2`
 
 
-**TIPP**: `RosTeamWS` tool has some scripts that can help you to solve this task faster. Resources:
+**TIPP**: `RosTeamWS` tool has some scripts that can help you to solve this task faster (on the branch is this already implemented). Resources:
 
   - [Commonly used robot-package structure](https://stoglrobotics.github.io/ros_team_workspace/master/guidelines/robot_package_structure.html)
   - [Creating a new package](https://stoglrobotics.github.io/ros_team_workspace/master/use-cases/ros_packages/create_package.html)
@@ -136,10 +139,9 @@ Include the macro file in `rrbot.urdf.xacro`.
 Files to create:
   - `rrbot_macro.ros2_control.xacro` - file with the `ros2_control` macro for the `rrbot`
 
-
 ##### Solution:
 
-Branch: `1-rrbot-description`
+Branch: `1-rrbot-description/solution`
 Check the files listed above and execute:
 ```
 ros2 launch controlko_description view_rrbot.launch.py
