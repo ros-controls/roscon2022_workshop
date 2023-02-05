@@ -8,7 +8,7 @@ Regardless if you could or could not participate the repository will provide you
 
 After cloning the repository, go to your source workspace and execute following command to install all dependencies:
 ```
-vcs import -input roscon2022_control_workshop/roscon2022_workshop.repos .
+vcs import --input roscon2022_workshop/roscon2022_workshop.repos .
 rosdep update
 rosdep install -y -i --from-paths .
 ```
@@ -93,7 +93,7 @@ In this excercise we will focus on setting up the description using XACRO format
 
 ##### Task
 
-Branch: `1-rrbot-description/task`
+Branch: `1-robot-description`
 
 **Task 1** Setup the XACRO for RRbot in a new package called
 
@@ -144,15 +144,6 @@ Include the macro file in `rrbot.urdf.xacro`.
 
 Files to create:
   - `rrbot_macro.ros2_control.xacro` - file with the `ros2_control` macro for the `rrbot`
-
-##### Solution:
-
-Branch: `1-rrbot-description/solution`
-Check the files listed above and execute:
-```
-ros2 launch controlko_description view_rrbot.launch.py
-```
-to view the robot and move its joins using `Joint State Publisher` GUI.
 
 
 ### 2. 🖥 Using *Mock Hardware* plugin for simple and generic testing of the setup
