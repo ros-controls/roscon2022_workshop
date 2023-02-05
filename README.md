@@ -93,7 +93,7 @@ In this excercise we will focus on setting up the description using XACRO format
 
 ##### Task
 
-Branch: `1-robot-description`
+Branch: `1-rrbot-description`
 
 **Task 1** Setup the XACRO for RRbot in a new package called
 
