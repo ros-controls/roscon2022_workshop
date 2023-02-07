@@ -245,7 +245,7 @@ Start the previous example one more time and try to answer the following questio
 
 ##### Solution:
 
-TODO: Add diagram/figure here.
+![Overview of *ros2_control*](https://control.ros.org/master/_images/ros2_control_overview.png)
 
 
 ### 4. 🔬 Introspection of *ros2_control* system
