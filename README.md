@@ -302,7 +302,7 @@ The plugins and interface for the simulators are the following:
 Let's define those plugins for `RRBot`:
 
 1. Extend `rrbot.urdf.xacro` with `<gazebo>` tags defining simulator plugins and parameters.
-2. Add hardware interface plugins under `<ros2_control>` tag.
+2. Add hardware interface plugins under `<ros2_control>` tag in the file `rrbot_macro.ros2_control.xacro`.
 3. Add new launch file `rrbot_sim_gazebo_class.launch.py` for starting Gazebo Classic simulation.
 4. Add new launch file `rrobt_sim_gazebo.launch.py` for starting Gazebo simulation.
 
