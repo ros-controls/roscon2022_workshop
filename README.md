@@ -160,19 +160,18 @@ to view the robot and move its joins using `Joint State Publisher` GUI.
 ##### GOAL
 
   - learn what is *Mock Hardware* and how to use it
-  - learn how you can fast and easy test you controller's setup and parameters before you deal with simulation or real hardware
+  - learn how you can fast and easily test you controller's setup and parameters before you deal with simulation or real hardware
 
 *Mock Hardware* is mocking ros2_control `Hardware Interface` based on the robot's description from the `ros2_control` tag.
-It's purpose is to simplify and boost development process when creating new controller or setting up their configuration.
+Its purpose is to simplify and boost development process when creating new controller or setting up their configuration.
 Advantage of using it, over simulation or real hardware, is very fast start-up and lean functionality.
 It is a well tested module helping you to focus on other components in your setup knowing that your "hardware" behaves ideally.
-*NOTE:* the functionality of *Mock Hardware* is intentionally limited and it's only enables you to reflect commanded values on the state interfaces with the same name. Nevertheless, this is sufficient for the most tasks.
+*NOTE:* the functionality of *Mock Hardware* is intentionally limited and it only enables you to reflect commanded values on the state interfaces with the same name. Nevertheless, this is sufficient for the most tasks.
 
 **TIPP**:
 
   - Dr. Denis recommends you to always start develop things first with the Mock Hardware and then start switching to simulation or real hardware. This way you save you time dealing with broken setup with simulation or hardware in the loop.
 
-**For the following yaml and launch files and create `contrlko_bringup` package**
 
 ##### 🛠 How to setup *Mock Hardware* for a robot?
 
@@ -183,7 +182,7 @@ The parameter create fake command interface for sensor values than enables you t
 
 **NOTE**: Currently, there is only `GenericSystem` mock component, which can mock also sensor or actuator components (because they just have reduced feature set compared to a system).
 
-##### 🔩 How to test it with a of-the-shelf controller?
+##### 🔩 How to test it with a off-the-shelf controller?
 
 1. Setup the following controllers for the `RRBot`:
 
