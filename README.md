@@ -87,7 +87,7 @@ In this excercise we will focus on setting up the description using XACRO format
 
 ##### Task
 
-Branch: `1-rrbot-description/task`
+Branch: `1-robot-description/task`
 
 **Task 1** Setup the XACRO for RRbot in a new package called
 
@@ -141,7 +141,7 @@ Files to create:
 
 ##### Solution:
 
-Branch: `1-rrbot-description/solution`
+Branch: `1-robot-description/solution`
 Check the files listed above and execute:
 ```
 ros2 launch controlko_description view_rrbot.launch.py
