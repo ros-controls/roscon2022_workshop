@@ -109,7 +109,7 @@ References:
   - https://wiki.ros.org/urdf
   - https://wiki.ros.org/urdf/XML
 
-Files to create:
+Files to create or adjust:
 
   - `rrbot_macro.xacro` - macro with kinematics and geometries for the `rrbot`
   - `rrbot.urdf.xacro` - main xacro file for the robot where macro is instantiated
