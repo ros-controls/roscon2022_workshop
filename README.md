@@ -386,7 +386,7 @@ Lifecycle diagrams from the [Task 6]() explaines in detail when which method is 
 
 ##### Task
 
-Branch: `7-rrbot-hardware-interface/task`
+Branch: `7-robot-hardware-interface/task`
 
 Write a hardware interface for the *RRBot*.
 
@@ -412,7 +412,7 @@ Write a hardware interface for the *RRBot*.
 
 ##### Soluation
 
-Branch: `7-rrbot-hardware-interface/solution`
+Branch: `7-robot-hardware-interface/solution`
 
 Execute following commands to get the answers from the task:
 
