@@ -199,7 +199,7 @@ The parameter create fake command interface for sensor values than enables you t
 
 ##### Solution:
 
-Branch: `2-rrbot-mock-hardware`
+Branch: `2-robot-mock-hardware`
 
 Check the files listed above and execute:
 ```
