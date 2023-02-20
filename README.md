@@ -8,7 +8,7 @@ Regardless if you could or could not participate the repository will provide you
 
 After cloning the repository, go to your source workspace and execute following command to install all dependencies:
 ```
-vcs import -input roscon2022_control_workshop/roscon2022_workshop.repos .
+vcs import --input roscon2022_workshop/roscon2022_workshop.repos .
 rosdep update
 rosdep install -y -i --from-paths .
 ```
