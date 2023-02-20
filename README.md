@@ -135,6 +135,8 @@ ros2 launch controlko_description view_rrbot.launch.py
 ```
 to view the robot and move its joins using `Joint State Publisher` GUI.
 
+**Note**: if you are using a docker and get a "black screen" in rviz, checkout this [issue](https://github.com/ros2/rviz/issues/948#issuecomment-1428979499) for help.
+
 
 ### 2. 🖥 Using *Mock Hardware* plugin for simple and generic testing of the setup
 
