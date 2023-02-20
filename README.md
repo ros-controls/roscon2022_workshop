@@ -268,11 +268,6 @@ They are searched for interfaces with standard names, `position`, `velocity` and
 The plugins and interface for the simulators are the following:
 
 
-#
-# prepare brANch w launch filess
-#
-
-
 
 **Gazebo Classic**
   - Package: `gazebo_ros2_control`
@@ -289,7 +284,7 @@ The plugins and interface for the simulators are the following:
 Let's define those plugins for `RRBot`:
 
 1. Extend `rrbot.urdf.xacro` with `<gazebo>` tags defining simulator plugins and parameters.
-2. Add hardware interface plugins under `<ros2_control>` tag.
+2. Add hardware interface plugins under `<ros2_control>` tag in the file `rrbot_macro.ros2_control.xacro`.
 3. Add new launch file `rrbot_sim_gazebo_class.launch.py` for starting Gazebo Classic simulation.
 4. Add new launch file `rrobt_sim_gazebo.launch.py` for starting Gazebo simulation.
 
@@ -309,6 +304,9 @@ ros2 launch controlko_bringup rrbot_sim_gazebo.launch.py
 ```
 
 Now execute test script for joint trajectory controller to move the robot.
+```
+ros2 launch controlko_bringup test_joint_trajectory_controller.launch.py
+```
 
 **NOTE**: When running simulation be sure to set the joint limits defined in the macro file.
 
