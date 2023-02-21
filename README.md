@@ -378,11 +378,11 @@ Lifecycle diagrams from the [Task 6]() explaines in detail when which method is 
 
 ##### Task
 
-Branch: `7-rrbot-hardware-interface/task`
+Branch: `7-robot-hardware-interface/task`
 
 Write a hardware interface for the *RRBot*.
 
-1. Create a new package named `controlko_hardware_interface` with hardware interface files.
+1. Create or adjust a package named `controlko_hardware_interface` with hardware interface files.
 2. During implemenation of hardware interface take care about following details:
 
    - Which control modes are supported?
@@ -402,7 +402,7 @@ Write a hardware interface for the *RRBot*.
 
 ##### Soluation
 
-Branch: `7-rrbot-hardware-interface/solution`
+Branch: `7-robot-hardware-interface/solution`
 
 Execute following commands to get the answers from the task:
 
