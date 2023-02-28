@@ -21,7 +21,7 @@ But actually, it is much more, it is kernel of ROS2 system that controls robots:
  - it provide resource access management,
  - controls theirs lifecycle and so on.
 
-For more details check [this presentation]
+For more details check [this presentation](https://control.ros.org/master/doc/resources/resources.html#ros-world-2021)
 
 
 ## Structure of this repository (and workshop)
@@ -60,7 +60,3 @@ The structure of the repository follows the flow of integrating robots with ROS2
 
     1. 💉 Parameter injection
     2. ⚖ Typical setup of robots and it packages
-
-## Hardware used in this repository
-
-The repository uses **Hercules** robot...
