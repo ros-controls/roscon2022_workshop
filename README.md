@@ -93,6 +93,10 @@ In this excercise we will focus on setting up the description using XACRO format
 
 Branch: `1-robot-description/task`
 
+
+Task 1 Setup the XACRO for RRbot in a package called `contrlko_description`
+
+
 Kinematics:
 
   - 2 DoF
