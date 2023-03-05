@@ -420,7 +420,7 @@ Although somewhat limited, this concept enables deterministic and reliable data 
 
 Branch: `8-write-controller/task`
 
-Write a controller for *SOLO-12* robot that takes joint displacements as input and updates new joint positions for it.
+Write a controller for *RRBot* robot that takes joint displacements as input and updates new joint positions for it.
 
 1. Add files for controller names `DisplacementController` into `controlko_controllers` package.
 2. During implementation of hardware interface take care about following details:
@@ -457,4 +457,4 @@ First check the code:
 
 Execute following commands to se new controller running:
 
-1. `ros2 launch controlko_bringup soho-12.launch.py`
+1. `ros2 launch controlko_bringup rrbot.launch.py`
