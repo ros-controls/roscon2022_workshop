@@ -420,7 +420,7 @@ Although somewhat limited, this concept enables deterministic and reliable data 
 
 Branch: `8-write-controller/task`
 
-Write a controller for *SOLO-12* robot that takes joint displacments as input and updates new joint positions for it.
+Write a controller for *RRBot* robot that takes joint displacments as input and updates new joint positions for it.
 
 1. Add controller files into `controlko_controllers` package.
 2. During implemenation of hardware interface take care about following details:

@@ -33,32 +33,6 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 
-# Add displacement_controller library related compile commands
-generate_parameter_library(displacement_controller_parameters
-  src/displacement_controller.yaml
-  include/controlko_controllers/validate_displacement_controller_parameters.hpp
-)
-add_library(
-  displacement_controller
-  SHARED
-  src/displacement_controller.cpp
-)
-target_include_directories(displacement_controller PRIVATE include)
-target_link_libraries(displacement_controller displacement_controller_parameters)
-ament_target_dependencies(displacement_controller ${THIS_PACKAGE_INCLUDE_DEPENDS})
-target_compile_definitions(displacement_controller PRIVATE "DISPLACEMENT_CONTROLLER_BUILDING_DLL")
-
-pluginlib_export_plugin_description_file(
-  controller_interface controlko_controllers.xml)
-
-install(
-  TARGETS
-  displacement_controller
-  RUNTIME DESTINATION bin
-  ARCHIVE DESTINATION lib
-  LIBRARY DESTINATION lib
-)
-
 install(
   DIRECTORY include/
   DESTINATION include
@@ -111,9 +85,6 @@ ament_export_include_directories(
 )
 ament_export_dependencies(
   
-)
-ament_export_libraries(
-  displacement_controller
 )
 
 ament_package()
