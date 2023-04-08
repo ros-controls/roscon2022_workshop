@@ -1,12 +1,12 @@
 # ROSCon 2022 workshop on ros2_control
 
 Thank you for your interest in ros2_control.
-This repository was developed with the purpose of supporting workshop on *ros2_control* @ ROSCon2022 in Kyoto, Japan.
+This repository was developed with the purpose of supporting the workshop on *ros2_control* @ ROSCon2022 in Kyoto, Japan.
 Whether you participated or not, this repository will provide you with detailed instructions on how to use the *ros2_control* framework, explaining the functionality and purpose of its individual parts.
 
 ### Installing this repository
 
-After cloning the repository, go to your source workspace and execute following commands to import the necessary repositories and to install all dependencies:
+After cloning the repository, go to your source workspace and execute the following commands to import the necessary repositories and to install all dependencies:
 ```
 vcs import --input roscon2022_workshop/roscon2022_workshop.repos .
 rosdep update
@@ -17,7 +17,7 @@ rosdep install -y -i --from-paths .
 
 In short, ros2_control is a control framework for ROS2.
 But actually, it is much more, it is the kernel of the ROS2 system that controls robots:
- - it abstracts hardware and low-level control for other framework such as MoveIt2 and Nav2;
+ - it abstracts hardware and low-level control for other frameworks such as MoveIt2 and Nav2;
  - it provides resource access management,
  - controls their lifecycle and so on.
 
