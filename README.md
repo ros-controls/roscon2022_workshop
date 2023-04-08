@@ -397,3 +397,43 @@ Execute the following commands to get the answers from the task:
    ros2 control set_controller_state incompatible_joint_trajectory_controller inactive
    ros2 control switch_controllers --deactivate forward_position_controller --activate incompatible_joint_trajectory_controller
    ```
+
+
+### 8. 🛂 How to write a controller
+
+Controllers in *ros2_control* are serving on the one hand as "interfaces" towards the ROS-world and on the other hand implement algorithms to control the hardware.
+A controller, when activated, gets loaned access to the exported hardware interface to read and write values directly from/to memory locations that the hardware interface is using.
+Although somewhat limited, this concept enables deterministic and reliable data flow between controllers and hardware interfaces (drivers).
+
+![Overview of *ros2_control*](https://control.ros.org/master/_images/ros2_control_overview.png)
+
+##### Task
+
+Branch: `8-write-controller/task`
+
+Write a controller for *RRBot* robot that takes joint displacments as input and updates new joint positions for it.
+
+1. Add controller files into the `controlko_controllers` package.
+2. During the implementation take care about the following details:
+
+   - How is data exchanged between the controller's callbacks and the `update` method?
+   - How are statuses from controller published to ROS topics?
+
+   - Controller should have a *slow mode* where displacements are reduced to half.
+   - Controller accepts a command only once.
+
+3. Write a controller that uses `control_msgs/msg/JointJog` message for the input.
+
+   - Check the definition of [`JointJog` message](https://github.com/ros-controls/control_msgs/blob/galactic-devel/control_msgs/msg/JointJog.msg)
+   - Alternatively use the CLI command: `ros2 interface show control_msgs/msg/JointJog`
+   - Use [Writing a new controller manual](https://control.ros.org/master/doc/ros2_controllers/doc/writing_new_controller.html) to implement the controller
+
+
+**TIPP**: `RosTeamWS` tool has some scripts that can help you solve this task faster. Resources:
+
+  - [Creating a new package](https://stoglrobotics.github.io/ros_team_workspace/master/use-cases/ros_packages/create_package.html)
+  - [Setup controller package](https://stoglrobotics.github.io/ros_team_workspace/master/use-cases/ros2_control/setup_controller.html) - choose setup of "normal" controller
+
+##### Solution
+
+Branch: `8-write-controller/solution`
