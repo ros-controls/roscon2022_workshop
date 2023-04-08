@@ -2,7 +2,7 @@
 
 Thank you for your interest in ros2_control.
 This repository was developed with the purpose of supporting the workshop on *ros2_control* @ ROSCon2022 in Kyoto, Japan.
-Whether you participated or not, this repository will provide you with detailed instructions on how to use the *ros2_control* framework, explaining the functionality and purpose of its individual parts.
+Whether you participated or not, the repository will provide you with detailed instructions on how to use the *ros2_control* framework and explain functionality and purpose of its individual parts.
 
 ### Installing this repository
 
@@ -35,10 +35,10 @@ The structure of the repository follows the flow of integrating robots with ROS2
 
 2. 🖥 Using the *Mock Hardware* plugin for easy and generic testing of the setup (and how it can save you ton of time and nerves)
 
-   1. 🛠 How to set up *Mock Hardware* for a robot?
-   2. 🔩 How to test it with an of-the-shelf controller?
+   1. 🛠 How to setup *Mock Hardware* for a robot?
+   2. 🔩 How to test it with an off-the-shelf controller?
 
-3. ⚙ Get to know the roles of the main components of the *ros2_control* framework: *Controller Manager*, *Controllers*, *Resource Manager* and *Hardware Interface*
+3. ⚙ Getting to know the roles of the main components of the *ros2_control* framework: *Controller Manager*, *Controllers*, *Resource Manager* and *Hardware Interface*
 
 4. 🔬 Introspection of the *ros2_control* system
 
@@ -63,11 +63,11 @@ The structure of the repository follows the flow of integrating robots with ROS2
 
 ##### 🗒 Setting up URDF using XACRO for a robot
 
-For any robot that is used with ROS/ROS2 URDF description is needed.
+For any robot that is used with ROS/ROS2 an URDF description is needed.
 This description holds information about kinematics, visualization (e.g., for Rviz2) and collision data.
-This description is are also used by popular ROS2 high-level libraries like, MoveIt2, Nav2 and Simulators.
+This description is also used by popular ROS2 high-level libraries like, MoveIt2, Nav2 and Simulators.
 
-In this excercise we will focus on setting up the description using XACRO format which is highly configurable and parameterizable and generally better to use then static URDF format.
+In this excercise we will focus on setting up the description using the XACRO format which is highly configurable and parameterizable and generally better to use than the static URDF format.
 
 ##### Task
 
@@ -80,8 +80,8 @@ Task 1 Setup the XACRO for RRbot in a package called `contrlko_description`
 Kinematics:
 
   - 2 DoF
-  - 1st joint is on a podest (box 30x30x30 cm) 30 cm above the ground and rotates around the axis orthogonal to the ground
-  - 1st link ist 50cm long (cylinder with 20cm diameter)
+  - 1st joint is on a pedestal (box 30x30x30 cm) 30 cm above the ground and rotates around the axis orthogonal to the ground
+  - 1st link is 50cm long (cylinder with 20cm diameter)
   - 2nd joint is rotation orthogonal to the first link's height
   - 2nd link is 60cm long  (10x10cm cross-section 5x5cm)
 
@@ -117,4 +117,4 @@ Check the files listed above and execute:
 ```
 ros2 launch controlko_description view_rrbot.launch.py
 ```
-to view the robot and move its joins using `Joint State Publisher` GUI.
+to view the robot and move its joints using the `Joint State Publisher` GUI.
