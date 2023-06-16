@@ -208,7 +208,7 @@ Start the previous example one more time and try to answer the following questio
 
 ##### Solution:
 
-TODO: Add diagram/figure here.
+![ros2_control Overview](https://github.com/ros-controls/control.ros.org/blob/master/doc/resources/images/ros2_control_overview.png)
 
 
 ### 4. 🔬 Introspection of *ros2_control* system
